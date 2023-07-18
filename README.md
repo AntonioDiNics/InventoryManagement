@@ -1,17 +1,17 @@
 # Inventory Management System
 
+## Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+
 ## Description
 The Inventory Management System is a Python program designed to manage inventory data for a shoe store. It allows users to perform various operations such as 
 capturing shoe details, viewing all shoes, restocking, searching for a shoe, calculating the value per item, and identifying the product with the highest quantity. 
 The system reads and writes data from/to a text file with a text-based interactive menu used for navigation. 
 
-## Table of Contents
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-
 ## Installation
-
 1. Clone the repository:
   - git clone https://github.com/AntonioDiNics/InventoryManagement.git
 
@@ -25,8 +25,6 @@ The system reads and writes data from/to a text file with a text-based interacti
   - python inventory.py
 
 ## Usage
-Once the program is running, you can use the following options from the interactive menu:
-
 - **Read shoe data (rsd)**: Reads the shoe data from the "inventory.txt" file and initializes the shoe list.
 - **Capture Shoe Details (csd)**: Allows you to capture data about a shoe and add it to the shoe list. The captured details are then saved to the "inventory.txt" file.
 - **View All (va)**: Displays the details of all the shoes in a tabular format.
