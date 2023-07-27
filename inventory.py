@@ -95,20 +95,33 @@ def capture_shoes():
     '''
 
     # capturing user input for the creation of the shoe object
+    valid = True
     country = input("Enter they country: ")
     code = input("Enter the code: ")
     product = input("Enter the product: ")
-    cost = input("Enter the cost: ")
-    quantity = input("Enter the quantity: ")
+    try: 
+        cost = float(input("Enter the cost: "))
+    except:
+        print("Invalid float.")
+        valid = False
+
+    try:
+        quantity = int(input("Enter the quantity: "))
+    except:
+        print("Invalid integer.")
+        valid = False
 
     # shoe object created using the variables from the user
-    shoe = Shoe(country,code,product,cost,quantity)
+    if valid == True:
+        shoe = Shoe(country,code,product,cost,quantity)
 
-    # shoe object added to list of all shoe objects
-    shoe_list.append(shoe)
+        # shoe object added to list of all shoe objects
+        shoe_list.append(shoe)
 
-    with open("inventory.txt" , "a") as inv_file:
-        inv_file.write(f"{country},{code},{product},{cost},{quantity}\n")
+        with open("inventory.txt" , "a") as inv_file:
+            inv_file.write(f"{country},{code},{product},{cost},{quantity}\n")
+    else:
+        print("One or more of the values that you entered are invalid. Please try again and pay close attention to the type of data you are entering.")
 
 def view_all():
     pass
