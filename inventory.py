@@ -96,9 +96,11 @@ def capture_shoes():
 
     # capturing user input for the creation of the shoe object
     valid = True
+
     country = input("Enter they country: ")
     code = input("Enter the code: ")
     product = input("Enter the product: ")
+
     try: 
         cost = float(input("Enter the cost: "))
     except:
@@ -121,7 +123,7 @@ def capture_shoes():
         with open("inventory.txt" , "a") as inv_file:
             inv_file.write(f"{country},{code},{product},{cost},{quantity}\n")
     else:
-        print("One or more of the values that you entered are invalid. Please try again and pay close attention to the type of data you are entering.")
+        print("\nOne or more of the values that you entered are invalid. Please try again and pay close attention to the type of data you are entering.")
 
 def view_all():
     pass
@@ -176,36 +178,43 @@ def re_stock():
 
         # they are asked the amount to restock by
         # this is added to the already existing quantity of the shoe and saved as rs_amount (re-stock amount)
-        rs_amount = int(input("\nEnter the amount you would like to restock by: ")) + int(lowest_quant.quantity)
+        valid = True
+        try:
+            rs_amount = int(input("\nEnter the amount you would like to restock by: ")) + int(lowest_quant.quantity)
+        except:
+            valid = False
 
-        # empty replace string created
-        replace = ""
+        if valid == True:
+            # empty replace string created
+            replace = ""
 
-        # text file opened in read only mode
-        with open("inventory.txt", "r") as inv_file:
+            # text file opened in read only mode
+            with open("inventory.txt", "r") as inv_file:
 
-            # each line of the file is looped through
-            for line in inv_file:
-                line = line.strip()
+                # each line of the file is looped through
+                for line in inv_file:
+                    line = line.strip()
 
-                # if the code of the shoe in the text file is the same as the lowest quantity object code
-                # new is set to line
-                # then the quantity in new is replaced with the updated restock amount
-                if line.strip().split(',')[1] == lowest_quant.code:
-                    new = line
-                    new = new.replace(line.strip().split(',')[4], str(rs_amount))
-                else:
-                    new = line
+                    # if the code of the shoe in the text file is the same as the lowest quantity object code
+                    # new is set to line
+                    # then the quantity in new is replaced with the updated restock amount
+                    if line.strip().split(',')[1] == lowest_quant.code:
+                        new = line
+                        new = new.replace(line.strip().split(',')[4], str(rs_amount))
+                    else:
+                        new = line
 
-                # for each iteration, replace is concatenated with new and a new line
-                replace = replace + new + '\n'
-        
-        # the text file is then opened again in write mode and replace string is written to the file
-        with open ("inventory.txt" , "w") as inv_file:
-            inv_file.write(replace)
+                    # for each iteration, replace is concatenated with new and a new line
+                    replace = replace + new + '\n'
 
-        # success message shown to user
-        print(f"\nShoe was re-stocked successfully and now has a total of {rs_amount}.")
+            # the text file is then opened again in write mode and replace string is written to the file
+            with open ("inventory.txt" , "w") as inv_file:
+                inv_file.write(replace)
+
+            # success message shown to user
+            print(f"\nShoe was re-stocked successfully and now has a total of {rs_amount}.")
+        else:
+            print("\nYou entered an invalid data type. Please enter an integer for the re-stock quantity.")
 
     elif choice == 'n':
         print("\nShoe will not be re-stocked.")
